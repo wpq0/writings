@@ -29,7 +29,7 @@ These features helps a great deal with brevity, but it still doesn't go all the 
 
 There are many in the C# [community](https://github.com/dotnet/roslyn/issues/12694) who [wish](https://github.com/dotnet/roslyn/issues/17) to have this duo of features in their language, too. That's because in C#, generic type parameters have to be specified explicitly, which can make the declaration and usage of generic code really verbose and unwieldly at times. For example, declaring generic members and standalone lambda expression is still a pain.
 
-Due to its C++ and OOP lineage, C# will most likely never get automatic generalization and H&M type inference. Future features in this area are expected to be small enhancement, like [default value for generic type parameter](TODO: link), and better type inference in [specific cases](https://github.com/dotnet/csharplang/blob/master/proposals/nullable-enhanced-common-type.md). Nothing that will fundamentally change the way C# programmers think and code.
+Due to its C++ and OOP lineage, C# will most likely never get automatic generalization and H&M type inference. Future features in this area are expected to be small enhancement, like [default value for generic type parameter](https://github.com/dotnet/csharplang/blob/master/proposals/target-typed-default.md), and better type inference in [specific cases](https://github.com/dotnet/csharplang/blob/master/proposals/nullable-enhanced-common-type.md). Nothing that will fundamentally change the way C# programmers think and code.
 
 ## Functions as first class citizens
 
@@ -75,45 +75,42 @@ Looking at the activities on [github](https://github.com/dotnet/csharplang), we 
 
 One criticism toward classical OOP and their type system is that it is too rigid and inflexible, where the only natural way to re-use types is to extend them. So often do we see the textbook OOP hierachy of cats, dogs, birds and human inheriting from animals breaking spectacularly in a real world projects.
 
-Some folk, probably when faced with existential crisis about types, came up with questions similar to one that were asked about functions: just as we can add or multiply integers, can we do the same with types? It turns out that we can, and it's called algebraic data type.
+Some folk, probably when faced with existential crisis about types, came up with questions similar to one that were asked about functions: just as we can add or multiply integers, can we do the same with types? It turns out that we can, and the results are product type and sum type.
 
 #### Product type
 
-The concept of Tuples were introduced to C# back in version 4, but it was clunky and almost nobody uses it. [Tuples](https://github.com/dotnet/roslyn/blob/master/docs/features/tuples.md), in C#7 gets a lot of compiler love, making it really easy to put data in a tuple, passes it around and extract data from it. 
+Product type is the result of multiplying types together. Classes in traditional OOP languages are product types. However, they were originally designed to house many things aside from data like methods, events, indexers... so they can be unecessarily verbose to be use as data type. The designers of C# are adding tuples and records to the language to help in this regard.
 
-[Record](https://github.com/dotnet/csharplang/blob/master/proposals/records.md)
+A **tuple** is basically an ordered sequence of values of different types. The concept of Tuples were introduced to C# back in version 4, but it was clunky and almost nobody uses it. [Tuples in C#7](https://github.com/dotnet/roslyn/blob/master/docs/features/tuples.md) gets a lot of compiler love, making it really easy to put data in a tuple, passes it around and extract data from it. Expect lots of code where multiple returning values or intermediary classes can be eliminated and replaced with tuples in the future.
+
+A **Record** is a simple container of named values. It'l like classes, but really succint and typically don't have any methods. There's a really promising [proposal for records]((https://github.com/dotnet/csharplang/blob/master/proposals/records.md)) in future C#.
+
+[TODO: code sample]
 
 #### Sum type
 
-Also known as [discriminated unions](https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/discriminated-unions) in F#, or [case classes](http://docs.scala-lang.org/tutorials/tour/case-classes.html) in Scala. 
+Sum type is the result of adding types together. It's also known as tagged union or [discriminated union](https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/discriminated-unions) in F#, or [case class](http://docs.scala-lang.org/tutorials/tour/case-classes.html) in Scala. It is useful for expressing a lot of tricky data situation, for example:
 
-New languages like [Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html) and [Rust](https://doc.rust-lang.org/book/enums.html) got their enum right. Even [Java's enum](https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html), while not all the way there yet, is a step in the right direction. In contrast, C#'s current [enum](https://docs.microsoft.com/en-us/dotnet/articles/csharp/language-reference/keywords/enum) implementation, is severely crippled. 
+- A function returning some data or none
+- An operation that either evaluate to a value successfully or encountered an error
+- An API that returns a 301 redirect or JSON content
 
-https://github.com/dotnet/roslyn/issues/347
+Traditional OOP languages also have a form of sum type in the form of `enum` but they are often underused and underpowered. C#'s [current enum implementation](https://docs.microsoft.com/en-us/dotnet/articles/csharp/language-reference/keywords/enum) is severely crippled, as it can only holds a few numeric data types. In contrast, new languages like [Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html) and [Rust](https://doc.rust-lang.org/book/enums.html) got their enum right and they can be used in place of tagged union.
 
-https://github.com/dotnet/csharplang/issues/113
+There's a [proposal](https://github.com/dotnet/csharplang/issues/113) for proper discriminated union in C# and there's clear intent from the team to start work on it some time in the future.
 
-## Null 
+#### No Null 
 
-https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare
+Another aspect where functional type system really shine is the banishment of the [billion-dollar mistake](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare): null reference. Null is dangerous in Java and C# because the type system allows it to be a member of all reference types. Null claims to support the contract of a type but that claim is a lie. Null is like a timed bomb that blows up when we try to use it, often at the most embarassing moment. In contrast, functional languages use the sum type [Maybe](http://package.elm-lang.org/packages/elm-lang/core/latest/Maybe) or [Option](https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/options) to handle missing values. An Option represent a value that can be either **something** or **none**. Unlike null, none isn't part of any other type, it doesn't claim to support any contract and will never blows up, as the compiler forces you to check for it whenever it encounters an Option.
 
-https://hackage.haskell.org/package/base-4.9.1.0/docs/Data-Maybe.html
+C# can never go back on null without breaking backward compatibility. However, that doesn't mean the designers can't find ways to make handling of nulls easier. In C#6, there was the [conditional operator](https://docs.microsoft.com/en-us/dotnet/articles/csharp/language-reference/operators/null-conditional-operators) `?.` for safely accessing nullable members. We're starting to see developers abusing this feature to great success in the wild. Future version of the C# compiler will likely have the ability to [track usage of nulls](
+https://github.com/dotnet/csharplang/blob/master/proposals/nullable-reference-types.md) and warn users where appropriate.
 
-https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/options
-
-http://package.elm-lang.org/packages/elm-lang/core/latest/Maybe
-
-https://docs.microsoft.com/en-us/dotnet/articles/csharp/language-reference/operators/null-conditional-operators
-
-
-https://github.com/dotnet/csharplang/blob/master/proposals/nullable-reference-types.md
-
-
-## Pattern matching
+### Pattern matching
 
 https://github.com/dotnet/csharplang/blob/master/proposals/patterns.md
 
-## Destructuring assignment
+### Destructuring assignment
 
 https://github.com/dotnet/roslyn/blob/master/docs/features/deconstruction.md
 
