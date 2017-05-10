@@ -1,14 +1,14 @@
 # Beyond C#7
 
-[IMG:C# logo?]
+[TODO: IMG:C# logo?]
 
 It's been amazing to follow the development of the C# language over the last decades. When Microsoft unveiled C# 1.0 in the early 2000s, industry veterans were [skeptical](http://www.artima.com/weblogs/viewpost.jsp?thread=6543), seeing it as little more than a boring alternative to Java. James Gosling essentially called it [a stupid imitation](https://www.cnet.com/news/why-microsofts-c-isnt/) of his brainchild. Despite all these odds, the team behind the C# language, lead by one Anders Hejlsberg, who doesn't even [have a beard](https://www.wired.com/2012/06/beard-gallery/), has continued to impress us with their ingenuity and pragmatic direction.
 
-[IMG:beard infographic]
+[TODO: IMG:beard infographic]
 
 Now at [version 7](https://blogs.msdn.microsoft.com/dotnet/2017/03/09/new-features-in-c-7-0/), C# has become a cross platform, multi-paradigm language with [many](https://msdn.microsoft.com/en-us/library/bb308959.aspx) [innovating](https://msdn.microsoft.com/en-us/library/bb397951(v=vs.110).aspx) [features](https://msdn.microsoft.com/en-us/library/mt674882.aspx). It's [well-loved](https://stackoverflow.com/insights/survey/2017#most-loved-dreaded-and-wanted) by the developers commnnity, and has become a source of inspiration for other languages like [Javascript](https://tc39.github.io/ecmascript-asyncawait/) and even [Java](https://jcp.org/en/jsr/detail?id=335).
 
-[IMG:Survey chart]
+[TODO: IMG:Survey chart]
 
 Now it's worth mentioning that there are no modern programming languages that's developed in a vacuum. Programming language design is a fertile field with a lot of cross pollination between the academia and the industry. C#, being a language for programmers in the industry, is no exception. It draws inspiration from a myriad of sources, from classical languages like C++, Java and Pascal, to dynamic ones like Ruby, Python and Javascript, to functional like [Haskell](https://www.haskell.org/), [OCaml](https://ocaml.org/) and most prominiently its close cousin [F#](http://fsharp.org/).
 
@@ -37,7 +37,9 @@ Have you ever wondered, what if we can declare functions as easily as declaring 
 
 Haskell and F# also have dedicated operators to compose and chain functions together. They also have an automatic currying process (named after [Haskell Curry](https://wiki.haskell.org/Currying)), which can turn functions with any number of parameters into functions with one parameter for composing. Because of this duo of features, we can often see a style in functional code where the programmer prepares a bunch of small, testable functions, then weave them into a chain of computation, and finally pipe in the data at the last step. This coding style is highly testable and tremendously reduces the need for elaborate mocking. This is in contrast to the OOP approach, where, in the [word](https://www.amazon.com/gp/product/1430219483) of Joe Armstrong of Erlang fame: "You wanted a banana but what you got was a gorilla holding the banana and the entire jungle."
 
+```
 [TODO: code sample]
+```
 
 Extension methods in C#3 helps a bit in this regard so we can have code that resemble a chain of computation. Unfortunately, once again, due to its OOP lineage with so many methods in the BCL having overloads, C# will probably never see anything like native currying and built-in functions composition. We will have to look to user-land libraries like the excellent [lang-ext](https://github.com/louthy/language-ext) for that need.
 
@@ -85,7 +87,9 @@ A **tuple** is basically an ordered sequence of values of different types. The c
 
 A **Record** is a simple container of named values. It'l like classes, but really succint and typically don't have any methods. There's a really promising [proposal for records]((https://github.com/dotnet/csharplang/blob/master/proposals/records.md)) in future C#.
 
+```
 [TODO: code sample]
+```
 
 #### Sum type
 
@@ -95,13 +99,17 @@ Sum type is the result of adding types together. It's also known as tagged union
 - An operation that either evaluate to a value successfully or encountered an error
 - An API that returns a 301 redirect or JSON content
 
-Traditional OOP languages also have a form of sum type in the form of `enum` but they are often underused and underpowered. C#'s [current enum implementation](https://docs.microsoft.com/en-us/dotnet/articles/csharp/language-reference/keywords/enum) is severely crippled, as it can only holds a few numeric data types. In contrast, new languages like [Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html) and [Rust](https://doc.rust-lang.org/book/enums.html) got their enum right and they can be used in place of tagged union.
+```
+TODO: code sample
+```
+
+Traditional OOP languages also have a form of sum type in the form of `enum` but they are often underused and underpowered. C#'s [current enum implementation](https://docs.microsoft.com/en-us/dotnet/articles/csharp/language-reference/keywords/enum) is severely crippled, as it can only hold a few numeric data types. In contrast, new languages like [Swift](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Enumerations.html) and [Rust](https://doc.rust-lang.org/book/enums.html) got their enum right and they can be used in place of tagged union.
 
 There's a [proposal](https://github.com/dotnet/csharplang/issues/113) for proper discriminated union in C# and there's clear intent from the team to start work on it some time in the future.
 
-#### No Null 
+#### No Null
 
-Another aspect where functional type system really shine is the banishment of the [billion-dollar mistake](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare): null reference. Null is dangerous in Java and C# because the type system allows it to be a member of all reference types. Null claims to support the contract of a type but that claim is a lie. Null is like a timed bomb that blows up when we try to use it, often at the most embarassing moment. In contrast, functional languages use the sum type [Maybe](http://package.elm-lang.org/packages/elm-lang/core/latest/Maybe) or [Option](https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/options) to handle missing values. An Option represent a value that can be either **something** or **none**. Unlike null, none isn't part of any other type, it doesn't claim to support any contract and will never blows up, as the compiler forces you to check for it whenever it encounters an Option.
+Another aspect where functional type system really shine is the banishment of the [billion-dollar mistake](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare): null reference. Null is dangerous in Java and C# because the type system allows it to be a member of all reference types. Null claims to support the contract of a type but that claim is a lie. Null is like a timed bomb that blows up when we try to use it, often at the most embarassing moment. In contrast, functional languages use the sum type [Maybe](http://package.elm-lang.org/packages/elm-lang/core/latest/Maybe) or [Option](https://docs.microsoft.com/en-us/dotnet/articles/fsharp/language-reference/options) to handle missing values. An Option represent a value that can be either **something** or **none**. Unlike null, none isn't part of any other type, it doesn't claim to support any contract and will [never blows up](https://blogs.msdn.microsoft.com/dsyme/2013/03/25/quote-of-the-week-what-can-c-do-that-f-cannot/), as the compiler forces you to check for it whenever it encounters an Option.
 
 C# can never go back on null without breaking backward compatibility. However, that doesn't mean the designers can't find ways to make handling of nulls easier. In C#6, there was the [conditional operator](https://docs.microsoft.com/en-us/dotnet/articles/csharp/language-reference/operators/null-conditional-operators) `?.` for safely accessing nullable members. We're starting to see developers abusing this feature to great success in the wild. Future version of the C# compiler will likely have the ability to [track usage of nulls](
 https://github.com/dotnet/csharplang/blob/master/proposals/nullable-reference-types.md) and warn users where appropriate.
