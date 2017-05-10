@@ -116,23 +116,31 @@ https://github.com/dotnet/csharplang/blob/master/proposals/nullable-reference-ty
 
 ### Pattern matching
 
-https://github.com/dotnet/csharplang/blob/master/proposals/patterns.md
+F# has it and C#'s gonna have this [nice thing](https://github.com/dotnet/csharplang/blob/master/proposals/patterns.md) soon. When this feature lands, we would expect the gradual fading away of `if` and `switch` statements, as the coming `match` expression is a much more powerful and succint construct:
+
+```
+TODO: code sample
+```
 
 ### Destructuring assignment
 
-https://github.com/dotnet/roslyn/blob/master/docs/features/deconstruction.md
+While only marginally useful when used on its own, this feature becomes much more powerful when paired with pattern matching. After we have tested that the incoming data match a certain shape and size, we can immediately break it a part and do useful things with its members. [Deconstruction protocol](https://github.com/dotnet/roslyn/blob/master/docs/features/deconstruction.md) landed in C#7, and any type can be deconstructed.
+
+```
+TODO: code sample
+```
 
 ## Trait
 
 Technically this is not an intrinsic feature of a functional programming language. I'm including it here because it has very interesting ramifications.
 
-There's a proposal for [default interface methods](https://github.com/dotnet/csharplang/issues/52). Basically, it's to subvert the traditional notion of an interface. No longer will it has to be a pure contract. Now interfaces can provide concrete implementations too. In Scala this is known as [trait](http://docs.scala-lang.org/tutorials/tour/traits.html) and it can be used to implement some thing similar to the mixins as found in dynamic languages like Ruby and Python(TDB: verify?).
+There's a proposal for [default interface methods](https://github.com/dotnet/csharplang/issues/52). Basically, it's to subvert the traditional notion of an interface. No longer will it has to be a pure contract. Now interfaces can provide concrete implementations too. In Scala this is known as [trait](http://docs.scala-lang.org/tutorials/tour/traits.html) and it can be used to implement some thing similar to the mixins as found in dynamic languages like Ruby and Python.
 
 ```csharp
 TODO: code sample
 ```
 
-Many members of the C# community are vocal against this feature, claiming that it would bring about the mess that is multiple inheritance in C++. However, the core team are adamant about including it. Apparently, this feature will scratch a lot of long running itches in the .NET framework and BCL (TODO: what itches?). Hence we will most likely see this feature landing in a coming version like C# 8.
+Many members of the C# community are vocal against this feature, claiming that it would bring about the mess that is multiple inheritance in C++. However, the core team are adamant about including it. Apparently, this feature will scratch a lot of long running itches in the .NET framework and BCL. Hence we will most likely see this feature landing in a coming version like C# 8.
 
 Personally I'm optimistic about this feature, I see it as a fun way to mix and match types outside the confine of classical inheritance. Expect to see new frameworks to take advantage of this and liberate themselves from maddeningly long chains of inheritance like the woe that happened to [WPF](https://msdn.microsoft.com/en-us/library/system.windows.controls.ribbon.ribbonbutton(v=vs.110).aspx)
 
@@ -140,4 +148,4 @@ Personally I'm optimistic about this feature, I see it as a fun way to mix and m
 
 ## Conclusion
 
-For programmers looking to enter the field, C# is an excellent starting point. Far has C# evolved from its root and we can learn a lot from its journey. It's beneficial for your long-term development as a programmer, whether you're using C# or not, or is planning to make the leap to other "real" functional languages like F#,Scala or Elm....
+For programmers looking to enter the field, C# is an good starting point in term of its practicality and paradigms it has adopted. Far has C# evolved from its root and we can learn a lot from its journey. It's beneficial for your long-term development as a programmer, whether you're using C# or not, or is planning to make the leap to other "real" functional languages like F#, Scala or Elm....
