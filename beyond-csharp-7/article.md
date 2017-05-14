@@ -9,7 +9,7 @@ Following the development of the C# language over the last decades has been amaz
 
 Now at[ version 7](https://blogs.msdn.microsoft.com/dotnet/2017/03/09/new-features-in-c-7-0/), C# has become a cross platform, multi-paradigm language with[ many](https://msdn.microsoft.com/en-us/library/bb308959.aspx)[ innovating](https://msdn.microsoft.com/en-us/library/bb397951%28v=vs.110%29.aspx)[ features](https://msdn.microsoft.com/en-us/library/mt674882.aspx). It's [well-loved](https://stackoverflow.com/insights/survey/2017#most-loved-dreaded-and-wanted) by the developer community, and has become a source of inspiration for other languages like[ Javascript](https://tc39.github.io/ecmascript-asyncawait/) and even[ Java](https://jcp.org/en/jsr/detail?id=335).
 
-![C# being one of the most loved language](most-loved.png)
+![C# being one of the most loved language](loved.png)
 <sub>Figure 2: StackOverflow's [survey result]((https://stackoverflow.com/insights/survey/2017#most-loved-dreaded-and-wanted)) showing C# as one of the most loved programming languages</sub>
 
 Now it's worth mentioning that there are no modern programming languages that's ever developed in a vacuum. Programming language design is a fertile field with a lot of cross pollination between academia and industry. As a language for programmers in the industry, C# is no exception. It draws inspiration from a myriad of sources, from classical languages like C++, Java and Pascal, to dynamic ones like Ruby, Python and Javascript, to functional like [Haskell](https://www.haskell.org/), [OCaml](https://ocaml.org/) and most prominently its close cousin [F#](http://fsharp.org/).
@@ -22,7 +22,7 @@ With each new C# version, there's a clear trend toward functional programming. I
 
 Generics, or [parametric polymorphism](https://en.wikipedia.org/wiki/Parametric_polymorphism), is basically the ability for programmers to handle similar kinds of data with one code base. And doing more with less is always a good thing. Generics is the foundation upon which many advance features are implemented. It is the bread and butter of any self-respecting language with a type system.
 
-Although generics is relatively simple to use from a working programmer's perspective, any language designers would know that it is a huge feat of engineering to implement. Java has generics a bit earlier than C#, but their implementation suffers from the problem of type erasure, which means the type parameter is known only at the compiler level, and it is lost (erased) when compiled to JVM byte code.
+Although generics is relatively simple to use from a working programmer's perspective, any language designers would know that it is a huge feat of engineering to implement. Java has generics a bit earlier than C#, but their implementation suffers from the problem of type erasure, which means the type parameter is known only at the compiler level, and it is lost (erased) when compiled to JVM bytecode.
 
 * C#'s generics was released with C# 2.0 in 2005, the result of the collaboration with Microsoft Research in Cambridge, UK - a place famous for functional researches. The team decided to make the effort to implement reified generics, which means type information is preserved all the way down to the CLR. It is said that, without that great undertaking to implement reified generics, later development of C# would be [severely limited](https://blogs.msdn.microsoft.com/dsyme/2011/03/15/netc-generics-history-some-photos-from-feb-1999/). For example; there would be no LINQ in C#3, no Task Parallel Library in C#4, and no async/await in C#5. Amusingly, Don Syme, who worked on C# generics went on to lead the design of F#.
 
@@ -162,7 +162,7 @@ C# can never go back on null without breaking backward compatibility. However, t
 
 ### Destructuring assignment
 
-While only marginally useful when used on its own, this feature becomes much more powerful when paired with pattern matching. After we have tested that the incoming data match a certain shape and size, we can immediately break it a part and do useful things with its members. [Deconstruction protocol](https://github.com/dotnet/roslyn/blob/master/docs/features/deconstruction.md) landed in C#7, and any type can be deconstructed.
+While only marginally useful when used on its own, this feature becomes much more powerful when paired with pattern matching. After we have tested that the incoming data match a certain shape and size, we can immediately break it apart and do useful things with its members. [Deconstruction protocol](https://github.com/dotnet/roslyn/blob/master/docs/features/deconstruction.md) landed in C#7, and any type can be deconstructed.
 
 ```csharp
 class Point
@@ -194,7 +194,6 @@ var areas =
     select new { Primitive = primitive, Area = area };
 ```
 <sub>Figure 9: proposed pattern matching syntax in future C#</sub>
-
 
 ## Conclusion
 
