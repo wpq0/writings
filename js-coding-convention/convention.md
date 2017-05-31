@@ -27,34 +27,20 @@ let aLet = 2;
 
 - Use array rest and spread operator `[...]` to simplify conversion to and from arrays as well as making modified copies.
 
-- When possible, use object rest and spread operator `{...}` to copy and modify an object instead of mutating it
+```js
+var parts = ['shoulders', 'knees']; 
+var lyrics = ['head', ...parts, 'and', 'toes']; 
+// ["head", "shoulders", "knees", "and", "toes"]
+```
 
+- When possible, use object rest and spread operator `{...}` to make modified copies of an object instead of mutating it
+
+```js
+const obj = {foo: 'a', bar: 'b'};
+const obj2 = {...obj, foo: 1};
+```
 
 - Use `async/await` to manage promises whenever possible:
-
-```js
-function getProcessedData(url) {
-  return downloadData(url) // returns a promise
-    .catch(e => {
-      return downloadFallbackData(url); // returns a promise
-    })
-    .then(v => {
-      return processDataInWorker(v); // returns a promise
-    });
-}
-```
-
-```js
-async function getProcessedData(url) {
-  let v;
-  try {
-    v = await downloadData(url); 
-  } catch(e) {
-    v = await downloadFallbackData(url);
-  }
-  return processDataInWorker(v);
-}
-```
 
 - Use `for...of` to iterate over arrays and iterables:
 
