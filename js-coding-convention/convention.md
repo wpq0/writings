@@ -83,6 +83,6 @@ Prefer consise and side-effect-free functions over verbose and effectful ones.
 
 When working in a browser, knowing when your script is scheduled in relation to layout and repainting will helps avoid common bugs and performance issues:
 
-- [Video](ttps://www.youtube.com/watch?v=8aGhZQkoFbQ)
+- [Video](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
 - [MDN entry](https://developer.mozilla.org/en/docs/Web/JavaScript/EventLoop/)
 - [Article on MicroTasks](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)
